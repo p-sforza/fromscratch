@@ -4,6 +4,7 @@ LABEL version="1.0.0"
 COPY helloworld.go /root/helloworld.go
 
 RUN cd /root 
+RUN pwd && ls -lai
 RUN go build -o go-run
 RUN pwd && ls -lai
 
