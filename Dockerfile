@@ -1,4 +1,4 @@
-FROM golang:1.11 as builder
+FROM golang:1.11 AS builder
 LABEL version="1.0.0"
 
 #RUN apt-get update  \
@@ -13,8 +13,10 @@ RUN go build -o go-run
 #FROM scratch
 FROM openshift/origin-base 
 
-COPY --from=builder go-run $HOME/go-run
+COPY --from=builder go-run /root/go-run && \
+     chown -R 1001:0 /root/go-run && \
+     chmod -R g+rw   /root/go-run
 
 #ENTRYPOINT ["$HOME/go-run"]
-CMD ["$HOME/go-run"]
+CMD ["/root/go-run"]
 
