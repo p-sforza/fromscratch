@@ -8,7 +8,7 @@ RUN go build -o go-run
 RUN pwd && ls -lai
 
 FROM scratch
-COPY --from=builder go-run go-run 
+COPY --from=builder /go/go-run go-run 
 RUN  chown -R 1001:0 go-run && \
      chmod -R g+rw   go-run
 
