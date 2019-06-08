@@ -10,8 +10,8 @@ COPY helloworld.go helloworld.go
 
 RUN go build -o go-run
 
-#FROM scratch
-FROM openshift/origin-base 
+FROM scratch
+#FROM openshift/origin-base 
 
 COPY --from=builder go-run /root/go-run && \
      chown -R 1001:0 /root/go-run && \
