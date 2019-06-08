@@ -15,4 +15,6 @@ FROM openshift/origin-base
 
 COPY --from=builder go-run $HOME/go-run
 
-ENTRYPOINT ["$HOME/go-run"]
+#ENTRYPOINT ["$HOME/go-run"]
+CMD ["$HOME/go-run"]
+
