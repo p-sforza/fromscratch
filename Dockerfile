@@ -1,18 +1,17 @@
 FROM golang:1.11 AS builder
 LABEL version="1.0.0"
 
-COPY helloworld.go /root/helloworld.go
+COPY helloworld.go helloworld.go
 
-RUN cd /root 
 RUN pwd && ls -lai
 RUN go build -o go-run
 RUN pwd && ls -lai
 
 FROM openshift/origin-base 
-COPY --from=builder /root/go-run /root/go-run 
-RUN  chown -R 1001:0 /root/go-run && \
-     chmod -R g+rw   /root/go-run
+COPY --from=builder go-run go-run 
+RUN  chown -R 1001:0 go-run && \
+     chmod -R g+rw   go-run
 
 #ENTRYPOINT ["$HOME/go-run"]
-CMD ["/root/go-run"]
+CMD ["go-run"]
 
